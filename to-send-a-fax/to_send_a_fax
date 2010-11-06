@@ -1,0 +1,79 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Google Labs advert
+# Communications of the ACM, August 2004 Volume 47, Number 8
+#
+# To send a fax,
+#
+# Dial the four-digit access code Y
+# where 60097 equals f(f(f(Y))).
+#
+# This machine has extension number Z
+# where f(f(Z)) = 1.
+#
+# (If you forgot your orientation packet,
+# E(x) = number of letters
+# when x is written out in American English
+# f(x) = 3[E(x)]^3-x)
+
+my @nletters_zero_to_nineteen = map { length $_ } qw(
+    zero      one       two       three     four      five      six       
+    seven     eight     nine      ten       eleven    twelve    thirteen
+    fourteen  fifteen   sixteen   seventeen eighteen  nineteen);
+
+my @nletters_twenty_to_ninety = map { length $_ } qw(
+    twenty    thirty    forty     fifty     sixty     seventy   eighty
+    ninety);
+
+sub is_multiple {
+    return $_[0] % $_[1] == 0 ? 1 : 0;
+}
+
+sub E {
+    my $x = shift;
+    if (0 <= $x && $x <= 19) {
+        return $nletters_zero_to_nineteen[$x];
+    }
+    elsif (20 <= $x && $x <= 99) {
+        my $tens = $nletters_twenty_to_ninety[int($x / 10) - 2];
+        return is_multiple($x, 10) ? $tens : $tens + E($x % 10);
+    }
+    elsif (100 <= $x && $x <= 999) {
+        my $hundreds = E(int($x/100)) + length "hundred";
+        return is_multiple($x, 100) ? $hundreds : $hundreds + E($x % 100);
+    }
+    elsif (1000 <= $x && $x <= 999999) {
+        my $thousands = E(int($x/1000)) + length "thousand";
+        return is_multiple($x, 1000) ? $thousands : $thousands + E($x % 1000);
+    }
+    elsif (-999999 <= $x && $x <= -1) {
+        return (length "minus") + E(abs $x);
+    }
+    else {
+        die "E $x out of range";
+    }
+}
+
+sub cubed {
+    return $_[0] * $_[0] * $_[0];
+}
+
+sub f {
+    my $x = shift;
+    return 3 * cubed(E($x)) - $x;
+}
+
+sub solve {
+    my ($want, $func_ref, $max) = @_;
+    for (my $i = 1; $i <= $max; $i++) {
+        if (&$func_ref($i) == $want) {
+            print "$i\n";
+        }
+    }
+}
+
+solve(60097, sub { f(f(f($_[0]))) }, 9999);
+solve(1, sub { f(f($_[0])) }, 9999);

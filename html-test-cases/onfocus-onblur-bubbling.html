@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>Do focus and blur events bubble?</title>
+<script type="text/javascript">
+function log(message){
+	var log = document.getElementById("log");
+	log.appendChild(document.createTextNode(message));
+	log.appendChild(document.createElement("br"));
+}
+function f(elem){
+	log("onfocus() " + elem.id);
+}
+function b(elem){
+	log("onblur() " + elem.id);
+}
+</script>
+</head>
+
+<body>
+
+<div id="container-div-no-tabindex" onfocus="f(this)" onblur="b(this)">
+<h2>container-div-no-tabindex</h2>
+<input id="input1" value="input1" onfocus="f(this)" onblur="b(this)">
+<a id="link1" href="#" onfocus="f(this)" onblur="b(this)">link1</a>
+<div id="inner-div-1" tabindex="0" onfocus="f(this)" onblur="b(this)">innner-div-1</div>
+</div>
+
+<hr>
+
+<div id="container-div-tabindex-0" tabindex="0" onfocus="f(this)" onblur="b(this)">
+<h2>container-div-tabindex-0</h2>
+<input id="input2" value="input2" onfocus="f(this)" onblur="b(this)">
+<a id="link2" href="#" onfocus="f(this)" onblur="b(this)">link2</a>
+<div id="inner-div-2" tabindex="0" onfocus="f(this)" onblur="b(this)">innner-div-2</div>
+</div>
+
+<hr>
+
+<div id="container-div-tabindex-minus-1" tabindex="-1" onfocus="f(this)" onblur="b(this)">
+<h2>container-div-tabindex-minus-1</h2>
+<input id="input3" value="input3" onfocus="f(this)" onblur="b(this)">
+<a id="link3" href="#" onfocus="f(this)" onblur="b(this)">link3</a>
+<div id="inner-div-3" tabindex="0" onfocus="f(this)" onblur="b(this)">innner-div-3</div>
+</div>
+
+<hr>
+
+<h2>container-ul</h2>
+<ul id="container-ul" onfocus="f(this)" onblur="b(this)">
+<li id="li" tabindex="0" onfocus="f(this)" onblur="b(this)">li</li>
+</ul>
+
+<hr>
+
+<div id="log">
+</div>
+
+</body>
+
+</html>

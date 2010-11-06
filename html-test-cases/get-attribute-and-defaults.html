@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
+<title>Getting attribute values and defaults</title>
+<script type="text/javascript">
+function getPropName(attrName){
+	switch(attrName){
+		case "colspan":
+			return "colSpan";
+		case "rowspan":
+			return "rowSpan";
+		case "valuetype":
+			return "valueType";
+		default:
+			return attrName;
+	}
+}
+function log(attrName, elemName){
+	var log = document.getElementById("log");
+	var elem = document.getElementsByTagName(elemName)[0];
+	log.appendChild(document.createTextNode(elemName
+		+ '.getAttribute("' + attrName + '") = '));
+	var getAttrValue = elem.getAttribute(attrName);
+	getAttrValue = getAttrValue == null ? "null" : '"' + getAttrValue + '"';
+	log.appendChild(document.createTextNode(getAttrValue));
+	log.appendChild(document.createElement("br"));
+	var propName = getPropName(attrName);
+	log.appendChild(document.createTextNode(elemName
+		+ '["' + propName + '"] = '));
+	var propValue = elem[propName];
+	propValue = propValue == null ? "null" : '"' + propValue + '"';
+	log.appendChild(document.createTextNode(propValue));
+	log.appendChild(document.createElement("br"));
+}
+function run(){
+	var userAgentTextNode = document.createTextNode(navigator.userAgent);
+	document.getElementById("user-agent").appendChild(userAgentTextNode);
+	log("colspan", "td");
+	log("enctype", "form");
+	log("frameborder", "iframe");
+	log("method", "form");
+	log("rowspan", "td");
+	log("scrolling", "iframe");
+	log("shape", "a");
+	log("span", "colgroup");
+	log("type", "input");
+	log("type", "button");
+	log("valuetype", "param");
+}
+</script>
+</head>
+
+<body onload="run()">
+<p><a href="http://www.w3.org/TR/html401/index/attributes.html">HTML4
+defines defaults for a number of attributes.</a>
+Some browsers return the default value when an attribute value is
+requested on an element that does not have a value specified for
+that attribute, and some do not.
+This page shows the results of requesting a value for each of the
+attributes with defaults in HTML4, other than 2 that are
+marked as deprecated ("clear", and "version"), on elements
+with no value set for those attributes.</p>
+<h2>User agent</h2>
+<p id="user-agent">
+<h2>Results</h2>
+<p id="log"></p>
+<hr>
+<table>
+<colgroup></colgroup>
+<tr><td></tr>
+</table>
+<form action="#">
+<div>
+<input>
+<button></button>
+</div>
+</form>
+<iframe></iframe>
+<p><a href="#">a</a></p>
+<object><param name="param1"></object>
+</body>

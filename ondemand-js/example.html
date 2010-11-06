@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>Example ondemand.js</title>
+<style type="text/css">
+	body { width: 400px; font-family: Arial, sans-serif; font-size: 0.88em }
+	#form1, input, textarea { border: 1px solid #ccc }
+	#form1 { padding-left: 10px }
+	label { font-weight: bold }
+</style>
+<script type="text/javascript" src="http://static.bitstructures.com/js/dojo-1.1.1/dojo/dojo.js"></script>
+<script type="text/javascript" src="ondemand.js"></script>
+<script type="text/javascript">
+	dojo.addOnLoad(function(){
+		ondemand("ondemand1", "Show Details", "Hide Details");
+	});
+</script>
+</head>
+
+<body>
+<div id="ondemand1">
+<form id="form1" action="example.html">
+<p><label for="tags">Tags:</label><br>
+<input id="tags" type="text"></p>
+<p><label for="description">Description:</label><br>
+<textarea id="description" rows="5" cols="30"></textarea></p>
+<p><button type="submit">Save</button></p>
+</form>
+</div>
+</body>
+</html>

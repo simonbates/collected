@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>Getting the tabindex value of an element with JavaScript</title>
+<script type="text/javascript">
+function Logger(){
+	this._rows = "";
+}
+Logger.prototype.log = function(desc, mechanism, value){
+	value = (value === null) ? "null" : value;
+	this._rows += "<tr><td>" + desc + "<\/td><td>"
+		+ mechanism + "<\/td><td>" + value + "<\/td><\/tr>\n";
+};
+Logger.prototype.getHTML = function(){
+	return "<table><thead>"
+		+ "<tr><th>Element<\/th><th>Mechanism<\/th><th>Value<\/th><\/tr>"
+		+ "<\/thead><tbody>\n"
+		+ this._rows
+		+ "<\/tbody><\/table>\n";
+};
+Logger.prototype.logGetAttribute = function(id, desc, attr, iFlags){
+	var elem = document.getElementById(id);
+	if(arguments.length == 4){
+		this.log(desc, 'elem.getAttribute("' + attr + '", ' + iFlags + ")",
+			elem.getAttribute(attr, iFlags));
+	}else{
+		this.log(desc, 'elem.getAttribute("' + attr + '")',
+			elem.getAttribute(attr));
+	}
+};
+Logger.prototype.logTabindexProperty = function(id, desc){
+	var elem = document.getElementById(id);
+	this.log(desc, "elem.tabindex", elem.tabindex);
+};
+Logger.prototype.logTabIndexProperty = function(id, desc){
+	var elem = document.getElementById(id);
+	this.log(desc, "elem.tabIndex", elem.tabIndex);
+};
+Logger.prototype.logAttributes = function(id, desc, attr){
+	var node = document.getElementById(id).attributes[attr];
+	if(node){
+		this.log(desc, 'elem.attributes["' + attr + '"].nodeValue',
+			node.nodeValue);
+		this.log(desc, 'elem.attributes["' + attr + '"].specified',
+			node.specified);
+	}else{
+		this.log(desc, 'elem.attributes["' + attr + '"]', node);
+	}
+};
+Logger.prototype.logGetAttributeNode = function(id, desc, attr){
+	var node = document.getElementById(id).getAttributeNode(attr);
+	if(node){
+		this.log(desc, 'elem.getAttributeNode("' + attr + '").nodeValue',
+			node.nodeValue);
+		this.log(desc, 'elem.getAttributeNode("' + attr + '").specified',
+			node.specified);
+	}else{
+		this.log(desc, 'elem.getAttributeNode("' + attr + '")', node);
+	}
+};
+Logger.prototype.logTabindex = function(id, desc){
+	this.logGetAttribute(id, desc, "tabindex");
+	if(isIE()){
+		this.logGetAttribute(id, desc, "tabindex", 0);
+		this.logGetAttribute(id, desc, "tabindex", 1);
+		this.logGetAttribute(id, desc, "tabindex", 2);
+	}
+	this.logGetAttribute(id, desc, "tabIndex");
+	if(isIE()){
+		this.logGetAttribute(id, desc, "tabIndex", 0);
+		this.logGetAttribute(id, desc, "tabIndex", 1);
+		this.logGetAttribute(id, desc, "tabIndex", 2);
+	}
+	this.logTabindexProperty(id, desc);
+	this.logTabIndexProperty(id, desc);
+	this.logAttributes(id, desc, "tabindex");
+	this.logAttributes(id, desc, "tabIndex");
+	this.logGetAttributeNode(id, desc, "tabindex");
+	this.logGetAttributeNode(id, desc, "tabIndex");
+};
+function isIE(){
+	return navigator.userAgent.indexOf("MSIE") != -1;
+}
+function showTableSource(){
+	document.getElementById("source").style.display = "block";
+}
+function removeTabindex(id){
+	var elem = document.getElementById(id);
+	if(isIE){
+		elem.removeAttribute("tabIndex");
+	}else{
+		elem.removeAttribute("tabindex");
+	}
+}
+function run(){
+	var userAgentTextNode = document.createTextNode(navigator.userAgent);
+	document.getElementById("userAgent").appendChild(userAgentTextNode);
+	removeTabindex("div-tabindex-removed");
+	removeTabindex("input-tabindex-removed");
+	logger = new Logger();
+	logger.logTabindex("div-no-tabindex", "div with no tabindex");
+	logger.logTabindex("div-tabindex-1", 'div with tabindex="1"');
+	logger.logTabindex("div-tabindex-minus-1", 'div with tabindex="-1"');
+	logger.logTabindex("div-tabindex-removed", "div with tabindex removed");
+	logger.logTabindex("input-no-tabindex", "input with no tabindex");
+	logger.logTabindex("input-tabindex-1", 'input with tabindex="1"');
+	logger.logTabindex("input-tabindex-minus-1", 'input with tabindex="-1"');
+	logger.logTabindex("input-tabindex-removed", "input with tabindex removed");
+	document.getElementById("log").innerHTML = logger.getHTML();
+	var sourceTextNode = document.createTextNode(logger.getHTML());
+	document.getElementById("source").appendChild(sourceTextNode);
+}
+</script>
+</head>
+
+<body onload="run()">
+<h2>User agent</h2>
+<div id="userAgent"></div>
+<h2>Results</h2>
+<div id="log"></div>
+<hr>
+<div><button onclick="showTableSource()">Show table source</button></div>
+<pre id="source" style="display:none"></pre>
+<hr>
+<div id="div-no-tabindex">div with no tabindex</div>
+<div id="div-tabindex-1" tabindex="1">div with tabindex="1"</div>
+<div id="div-tabindex-minus-1" tabindex="-1">div with tabindex="-1"</div>
+<div id="div-tabindex-removed" tabindex="1">div with tabindex removed</div>
+<div>
+<input id="input-no-tabindex" value="input with no tabindex">
+<input id="input-tabindex-1" tabindex="1" value='input with tabindex="1"'>
+<input id="input-tabindex-minus-1" tabindex="-1" value='input with tabindex="-1"'>
+<input id="input-tabindex-removed" tabindex="1" value="input with tabindex removed">
+</div>
+</body>
+
+</html>

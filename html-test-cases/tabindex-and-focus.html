@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>tabindex and focus</title>
+<style type="text/css">
+div, input, img {
+	border-color: #000;
+	border-style: solid;
+}
+div, img {
+	border-width: 0px;
+}
+input {
+	border-width: 1px;
+	margin: 5px;
+}
+div.focused, input.focused, img.focused {
+	border-width: 5px;
+}
+</style>
+<script type="text/javascript">
+function focusElem(id){
+	setTimeout(function(){
+		document.getElementById(id).focus();
+	}, 0);
+}
+function highlight(elem){
+	elem.className = "focused";
+}
+function unhighlight(elem){
+	elem.className = "";
+}
+</script>
+</head>
+
+<body>
+
+<div id="div-no-tabindex" onfocus="highlight(this)" onblur="unhighlight(this)"
+	>div no tabindex</div>
+<div id="div-tabindex-minus-1" tabindex="-1" onfocus="highlight(this)"
+	onblur="unhighlight(this)">div tabindex="-1"</div>
+<div id="div-tabindex-0" tabindex="0" onfocus="highlight(this)"
+	onblur="unhighlight(this)">div tabindex="0"</div>
+
+<p>
+<input id="input-no-tabindex" value="input no tabindex"
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+<br>
+<input id="input-tabindex-minus-1" tabindex="-1"
+	value='input tabindex="-1"'
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+<br>
+<input id="input-tabindex-0" tabindex="0" value='input tabindex="0"'
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+</p>
+
+<p>
+img no tabindex: <img id="img-no-tabindex" src="greenbox.png" alt="green box"
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+<br>
+img tabindex="-1": <img id="img-tabindex-minus-1" src="greenbox.png"
+	alt="green box" tabindex="-1"
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+<br>
+img tabindex="0": <img id="img-tabindex-0" src="greenbox.png" alt="green box"
+	tabindex="0"
+	onfocus="highlight(this)" onblur="unhighlight(this)">
+</p>
+
+<hr>
+
+<div>
+<button onclick='focusElem("div-no-tabindex")'>focus div no tabindex</button><br>
+<button onclick='focusElem("div-tabindex-minus-1")'>focus div tabindex="-1"</button><br>
+<button onclick='focusElem("div-tabindex-0")'>focus div tabindex="0"</button><br>
+<button onclick='focusElem("input-no-tabindex")'>focus input no tabindex</button><br>
+<button onclick='focusElem("input-tabindex-minus-1")'>focus input tabindex="-1"</button><br>
+<button onclick='focusElem("input-tabindex-0")'>focus input tabindex="0"</button><br>
+<button onclick='focusElem("img-no-tabindex")'>focus img no tabindex</button><br>
+<button onclick='focusElem("img-tabindex-minus-1")'>focus img tabindex="-1"</button><br>
+<button onclick='focusElem("img-tabindex-0")'>focus img tabindex="0"</button>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<title>focus capture example</title>
+<script type="text/javascript">
+function log(message){
+	var log = document.getElementById("log");
+	log.appendChild(document.createTextNode(message));
+	log.appendChild(document.createElement("br"));
+}
+function handleFocus(){
+	log("focus " + this.id);
+}
+function handleBlur(){
+	log("blur " + this.id);
+}
+function setup(){
+	var itemIds = ["c1i1", "c1i2", "c2i1", "c2i2"];
+	for(var i=0; i<itemIds.length; i++){
+		var elem = document.getElementById(itemIds[i]);
+		elem.tabIndex = 0;
+//		elem.addEventListener("focus", handleFocus, false);
+//		elem.addEventListener("blur", handleBlur, false);
+	}
+	var containerIds = ["c1", "c2"];
+	for(var i=0; i<containerIds.length; i++){
+		var elem = document.getElementById(containerIds[i]);
+		elem.addEventListener("focus", handleFocus, true);
+		elem.addEventListener("blur", handleBlur, true);
+//		elem.addEventListener("focus", handleFocus, false);
+//		elem.addEventListener("blur", handleBlur, false);
+	}
+}
+</script>
+</head>
+
+<body onload="setup()">
+
+<div id="c1">
+<div id="c1i1">c1i1</div>
+<div id="c1i2">c1i2</div>
+</div>
+
+<hr>
+
+<div id="c2">
+<div id="c2i1">c2i1</div>
+<div id="c2i2">c2i2</div>
+</div>
+
+<hr>
+
+<div id="log"></div>
+
+</body>
+
+</html>

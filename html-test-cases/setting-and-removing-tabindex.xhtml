@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Setting and removing the tabindex value of an element with JavaScript</title>
+<script type="text/javascript">
+function log(message){
+	text = document.createTextNode(message);
+	document.getElementById("log").appendChild(text);
+	document.getElementById("log").appendChild(document.createElement("br"));
+}
+function logSetAttribute(){
+	var input = document.createElement("input");
+	input.tabIndex = 1;
+	input.setAttribute("tabindex", 2);
+	log('setAttribute("tabindex")' + (input.tabIndex == 2 ? " yes" : " no"));
+	input.tabIndex = 1;
+	input.setAttribute("tabIndex", 2);
+	log('setAttribute("tabIndex")' + (input.tabIndex == 2 ? " yes" : " no"));
+}
+function hasTabindex(elem){
+	var attr = elem.getAttributeNode("tabindex");
+	return attr ? attr.specified : false;
+}
+function logRemoveAttribute(){
+	var input = document.createElement("input");
+	input.tabIndex = 1;
+	input.removeAttribute("tabindex");
+	log('removeAttribute("tabindex")' + (hasTabindex(input) ? " no" : " yes"));
+	input.tabIndex = 1;
+	input.removeAttribute("tabIndex");
+	log('removeAttribute("tabIndex")' + (hasTabindex(input) ? " no" : " yes"));
+}
+function run(){
+	logSetAttribute();
+	logRemoveAttribute();
+}
+</script>
+</head>
+
+<body onload="run()">
+<p id="log"></p>
+</body>
+
+</html>

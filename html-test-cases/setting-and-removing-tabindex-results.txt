@@ -1,0 +1,102 @@
+Internet Explorer 6 Windows XP
+
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)
+
+HTML:
+
+setAttribute("tabindex") no
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") no
+removeAttribute("tabIndex") yes
+
+----
+
+Internet Explorer 7.0.5730.11 Windows XP
+
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)
+
+HTML:
+
+setAttribute("tabindex") no
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") no
+removeAttribute("tabIndex") yes
+
+----
+
+Firefox 2.0.0.11 Windows XP
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11
+
+HTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") yes
+
+XHTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") no
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") no
+
+----
+
+Minefield nightly 3.0b3pre 2008010705 Windows XP
+
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9b3pre) Gecko/2008010705 Minefield/3.0b3pre
+
+HTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") yes
+
+XHTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") no
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") no
+
+----
+
+Safari 3.0.4 Mac OS X 10.5.1
+
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/523.10.3 (KHTML, like Gecko) Version/3.0.4 Safari/523.10
+
+HTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") yes
+
+XHTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") no
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") no
+
+----
+
+Opera 9.25 Windows XP
+Opera/9.25 (Windows NT 5.1; U; en)
+
+HTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") yes
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") yes
+
+XHTML:
+
+setAttribute("tabindex") yes
+setAttribute("tabIndex") no
+removeAttribute("tabindex") yes
+removeAttribute("tabIndex") no

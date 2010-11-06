@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>Setting the "for" attribute on a label</title>
+</head>
+
+<body>
+<div>
+<label for="in1">in markup</label> <input id="in1"><br>
+<label id="l2">element["for"]</label> <input id="in2"><br>
+<label id="l3">element.for</label> <input id="in3"><br>
+<label id="l4">element.setAttribute</label> <input id="in4">
+</div>
+<script type="text/javascript">
+document.getElementById("l2")["for"] = "in2";
+document.getElementById("l3").for = "in3";
+document.getElementById("l4").setAttribute("for", "in4");
+</script>
+</body>
+
+</html>
