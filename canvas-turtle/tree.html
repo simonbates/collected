@@ -1,0 +1,27 @@
+<html>
+<head>
+<script type="text/javascript" src="canvas-turtle.js"></script>
+</head>
+<body>
+<h1>Tree</h1>
+<canvas id="canvas1" width="400" height="520"></canvas>
+<script type="text/javascript">
+  var tree = function(turtle, dist) {
+    if (dist < 2) {
+      return;
+    }
+    turtle.forward(dist);
+    turtle.right(45);
+    tree(turtle, dist/2);
+    turtle.left(90);
+    tree(turtle, dist/2);
+    turtle.right(45);
+    tree(turtle, 3*dist/4);
+    turtle.back(dist);
+  };
+  var t = new Turtle("canvas1");
+  t.setxy(200, 520);
+  tree(t, 128);
+</script>
+</body>
+</html>
