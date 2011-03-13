@@ -4,24 +4,68 @@
 </head>
 <body>
 <h1>Tree</h1>
-<canvas id="canvas1" width="400" height="520"></canvas>
+<canvas id="canvas1" width="800" height="600"></canvas>
 <script type="text/javascript">
+  var random = function(min, max) {
+    return Math.random() * (max - min) + min;
+  };
+
   var tree = function(turtle, dist) {
-    if (dist < 2) {
+    if (dist < 12) {
       return;
     }
-    turtle.forward(dist);
-    turtle.right(45);
-    tree(turtle, dist/2);
-    turtle.left(90);
-    tree(turtle, dist/2);
-    turtle.right(45);
-    tree(turtle, 3*dist/4);
-    turtle.back(dist);
+
+    var startX = turtle.x;
+    var startY = turtle.y;
+    var startHeading = turtle.heading;
+    var startLineWidth = turtle.lineWidth;
+
+    var angle1 = random(36, 46);
+    var angle2 = random(-3, 3);
+    var angle3 = random(36, 46);
+    var angle4 = random(-5, 5);
+    var angle5 = random(36, 46);
+    var angle6 = random(36, 46);
+    var dist1 = random(dist * 0.45, dist * 0.55);
+    var dist2 = random(dist * 0.05, dist * 0.15);
+    var dist3 = dist - dist1 - dist2;
+    var dist4 = dist * 0.04;
+    var branchDist1 = random(dist * 0.56, dist * 0.64);
+    var branchDist2 = random(dist * 0.56, dist * 0.64);
+    var branchDist3 = random(dist * 0.56, dist * 0.64);
+    var branchDist4 = random(dist * 0.56, dist * 0.64);
+    var lineWidth = Math.max(1, random(dist * 0.09, dist * 0.11));
+
+    turtle.setLineWidth(lineWidth);
+
+    turtle.forward(dist1);
+    turtle.left(angle1);
+    tree(turtle, branchDist1);
+    turtle.right(angle1 + angle2);
+
+    turtle.back(2);
+    turtle.forward(dist2);
+    turtle.right(angle3);
+    tree(turtle, branchDist2);
+    turtle.left(angle3 + angle4);
+
+    turtle.back(2);
+    turtle.forward(dist3);
+    turtle.back(dist4);
+    turtle.left(angle5);
+    tree(turtle, branchDist3);
+    turtle.right(angle5 + angle6);
+    tree(turtle, branchDist4);
+
+    turtle.setXY(startX, startY);
+    turtle.setHeading(startHeading);
+    turtle.setLineWidth(startLineWidth);
   };
+
   var turtle = new Turtle("canvas1");
-  turtle.setxy(200, 520);
-  tree(turtle, 128);
+  turtle.setXY(400, 600);
+  turtle.setColor(36, 36, 36);
+  tree(turtle, 260);
 </script>
 </body>
 </html>
